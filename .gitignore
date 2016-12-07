@@ -3,3 +3,8 @@ node_modules
 .tern-project
 .idea/
 .log
+build
+doc
+mock2easy
+.git
+__build_info__
