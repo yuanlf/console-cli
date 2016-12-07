@@ -1,0 +1,20 @@
+{
+  "name": "console-cli",
+  "version": "1.0.0",
+  "description": "阿里云控制台脚手架工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuanlf/console-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuanlf/console-cli/issues"
+  },
+  "homepage": "https://github.com/yuanlf/console-cli#readme"
+}
