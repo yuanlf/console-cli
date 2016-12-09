@@ -1,1 +1,101 @@
 #!/usr/bin/env node
+var program = require('commander')
+var exists = require('fs').existsSync
+var path = require('path')
+var ora = require('ora')
+var inquirer = require('inquirer')
+var generate = require('../lib/generate')
+var checkVersion = require('../lib/check-version')
+var logger = require('../lib/logger')
+var chalk = require('chalk')
+
+/**
+ * Usage.
+ */
+program
+  .usage('[project-name]')
+
+/**
+ * Help.
+ */
+ program.on('--help', function () {
+   console.log('  Examples:')
+   console.log()
+   console.log(chalk.gray('    # create a new project'))
+   console.log('    console init my-project')
+   console.log()
+ })
+
+ /**
+ * Help.
+ */
+function help () {
+  program.parse(process.argv)
+  if (program.args.length < 1) return program.help()
+}
+help()
+
+/**
+ * Padding.
+ */
+console.log()
+process.on('exit', function () {
+  console.log()
+})
+
+var projectName = program.args[0]
+var inPlace = !projectName || projectName === '.'
+var name = inPlace ? path.relative('../', process.cwd()) : projectName
+var to = path.resolve(projectName || '.')
+
+if (exists(to)) {
+  inquirer.prompt([{
+    type: 'confirm',
+    message: inPlace
+      ? 'Generate project in current directory?'
+      : 'Target directory exists. Continue?',
+    name: 'ok'
+  }]).then(function(answers) {
+    if (answers.ok) {
+      run()
+    }
+  })
+} else {
+  run()
+}
+
+/**
+ * Check, generate the project.
+ */
+function run() {
+  checkVersion(function() {
+    startGenerate()
+  })
+}
+
+function successMessage() {
+  console.log()
+  logger.success('Success! Created "%s" at "%s".', name, to)
+  logger.success('You have to execute yarn or npm install command.')
+  logger.success('You can run several commands:')
+  logger.success('    npm run dev: Starts the development server.')
+  logger.success('    npm run build: Bundles the app into build for production.')
+}
+
+/**
+ * generate from a template
+ *
+ */
+function startGenerate() {
+  var templatePath = path.join(__dirname, '../template')
+  // var spinner = ora({ text: 'generate from template' })
+  // spinner.start();
+
+  generate(templatePath, to, function(err) {
+    if (err) logger.fatal(err)
+
+    // spinner.succeed()
+
+    successMessage()
+  })
+}
