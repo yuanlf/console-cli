@@ -75,7 +75,7 @@ function run() {
 
 function successMessage() {
   console.log()
-  logger.success('Success! Created "%s" at "%s".', name, to)
+  logger.success('Created "%s" at "%s".', name, to)
   logger.success('You have to execute yarn or npm install command.')
   logger.success('You can run several commands:')
   logger.success('    npm run dev: Starts the development server.')
@@ -88,13 +88,13 @@ function successMessage() {
  */
 function startGenerate() {
   var templatePath = path.join(__dirname, '../template')
-  // var spinner = ora({ text: 'generate from template' })
-  // spinner.start();
+  var spinner = ora({ text: 'generate from template Successed!' })
 
   generate(templatePath, to, function(err) {
     if (err) logger.fatal(err)
 
-    // spinner.succeed()
+    console.log("")
+    spinner.succeed()
 
     successMessage()
   })
