@@ -26,7 +26,7 @@ module.exports = {
 			'redux',
 			'redux-thunk'
 		],
-		app: path.join(src, 'scripts/app/app.js')
+		app: path.join(src, 'scripts/app.js')
 	},
 	output: {
 		path: path.join(commonPath.build, ''),
@@ -40,7 +40,8 @@ module.exports = {
 		],
 		alias: {
 			CSS: path.join(src, 'css'),
-			SCRIPTS: path.join(src, 'scripts')
+			SCRIPTS: path.join(src, 'scripts'),
+			PAGE: path.join(src, 'scripts/pages')
 		}
 	},
 	resolveLoader: {

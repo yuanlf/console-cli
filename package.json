@@ -1,6 +1,6 @@
 {
   "name": "console-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "阿里云控制台脚手架工具",
   "engines": {
     "node": ">=4.0.0"
